@@ -1,0 +1,68 @@
+int[] arr = { 1,2,3,5,4 };
+            int[] arr2 = { 182,1245,214,57,4354,21359,3435,2421,454454,21312,34727,9278368,34324324,130274921,32133,1 };
+//Пузырик
+            Stopwatch stopWatch = new Stopwatch();
+            stopWatch.Start();
+            BubbleSort(arr);
+            stopWatch.Stop();
+            TimeSpan B1 = stopWatch.Elapsed;
+            Console.WriteLine("Пузыриком(aдаптивный массив) " + B1.ToString());
+
+            stopWatch.Start();
+            BubbleSort(arr2);
+            stopWatch.Stop();
+            TimeSpan B2 = stopWatch.Elapsed;
+            Console.WriteLine("Пузыриком(сложный массив) " + B2.ToString());
+//Шелла
+            Console.WriteLine();
+
+            stopWatch.Start();
+            ShellSort(arr);
+            stopWatch.Stop();
+            TimeSpan Sh1 = stopWatch.Elapsed;
+            Console.WriteLine("Шелла(aдаптивный массив) " + Sh1.ToString());
+
+            stopWatch.Start();
+            ShellSort(arr2);
+            stopWatch.Stop();
+            TimeSpan Sh2 = stopWatch.Elapsed;
+            Console.WriteLine("Шелла(сложный массив) " + Sh2.ToString());
+            Console.ReadKey();
+        }
+        //метод для метода Пузырика
+        public static void BubbleSort(int[] Array)
+        {
+            for (int i = 0; i < Array.Length; i++)
+            {
+                for (int j = 0; j < Array.Length - 1; j++)
+                {
+                    if (Array[j] > Array[j + 1])
+                    {
+                        int temp = Array[j];
+                        Array[j] = Array[j + 1];
+                        Array[j + 1] = temp;
+                    }
+                }
+            }
+        }
+        //метод для метода Шелла
+        public static void ShellSort(int[] Array)
+        {
+            int j;
+            int step = Array.Length / 2;
+            while (step > 0)
+            {
+                for (int i = 0; i < (Array.Length - step); i++)
+                {
+                    j = i;
+                    while ((j >= 0) && (Array[j] > Array[j + step]))
+                    {
+                        int tmp = Array[j];
+                        Array[j] = Array[j + step];
+                        Array[j + step] = tmp;
+                        j -= step;
+                    }
+                }
+                step = step / 2;
+            }
+        }
